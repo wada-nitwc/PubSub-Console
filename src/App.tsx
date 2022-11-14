@@ -5,7 +5,8 @@ import {useState,useEffect} from "react";
 import {desktopDir,join} from '@tauri-apps/api/path';
 import { convertFileSrc } from '@tauri-apps/api/tauri';
 import { invoke } from "@tauri-apps/api";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from 'react-router-dom';
+import ChangePage from "./main";
 
 const App = () => {
   const [url,setUrl] = useState<string>("");
@@ -56,6 +57,7 @@ const App = () => {
       <input type="text" />
       <button>送信</button>
       <br />
+      <p onClick={e => ChangePage("Unchi")}>aaaa</p>
      
      
     </>

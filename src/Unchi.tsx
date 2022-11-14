@@ -2,6 +2,7 @@ import {useState,useEffect} from "react";
 import {desktopDir,join} from '@tauri-apps/api/path';
 import { convertFileSrc } from '@tauri-apps/api/tauri';
 import { invoke } from "@tauri-apps/api";
+import ChangePage from "./main";
 
 const Unchi = () => {
     const [url,setUrl] = useState<string>("");
@@ -27,6 +28,7 @@ const Unchi = () => {
     return (
       <>
         <h1>unchi</h1>
+        <p onClick={e=>ChangePage("App")}>戻る</p>
        
       </>
     );
