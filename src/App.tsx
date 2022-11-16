@@ -37,7 +37,10 @@ const App = () => {
   },[src]);
 
   async function Publish(){
-    await invoke("test",{role: "client",msg: value});
+    ChangePage("Waiting");
+    await invoke("test",{role: "server",msg: value});
+    ChangePage("App");
+    
   
 
   }
