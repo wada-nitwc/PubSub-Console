@@ -11,7 +11,8 @@ import ChangePage from "./main";
 const App = () => {
   const [url,setUrl] = useState<string>("");
   const [src,setSrc] = useState<string>("");
-  const [value,setValue] = useState<string>("");
+  const [SubscribeValue,SetSubscribeValue] = useState<string>("");
+  const [PublishValue,SetPublishValue] = useState<string>("");
   const [player,setPlayer] = useState<JSX.Element>();
   const [res,setRes] = useState<string>("");
 
@@ -23,25 +24,19 @@ const App = () => {
   },[]);
 
 
-
-  useEffect(()=>{
-    const fn = async () =>{
-      const desktopDirPath = await desktopDir();
-      const new_url = convertFileSrc(await join(desktopDirPath,src));
-      setUrl(new_url);
-      const player = <ReactPlayer url = {new_url} controls={true}/>;
-      setPlayer(player);
-
-    };
-    fn();
-  },[src]);
-
   async function Publish(){
     ChangePage("Waiting");
-    await invoke("test",{role: "server",msg: value});
-    ChangePage("App");
+    await invoke("test",{role: "server",msg: PublishValue});
+   
+    ChangePage("Matching");
     
   
+
+  }
+  async function Subscribe(){
+    ChangePage("Waiting");
+    await invoke("test",{role: "client",msg: SubscribeValue})
+    ChangePage("Matching");
 
   }
   
@@ -51,14 +46,14 @@ const App = () => {
       <br />
       <div>
       <h2>Publish</h2>
-      <input type="text" value={value} onChange={e => setValue(e.target.value)}/>
+      <input type="text" value={PublishValue} onChange={e => SetPublishValue(e.target.value)}/>
       <button onClick={Publish} >送信</button>
       </div>
       
       <br/>
       <h2>Subscribe</h2>
-      <input type="text" />
-      <button>送信</button>
+      <input type="text" value={SubscribeValue} onChange={ e => SetSubscribeValue(e.target.value)}/>
+      <button onClick={Subscribe}>送信</button>
       <br />
       <p onClick={e => ChangePage("Unchi")}>aaaa</p>
      
